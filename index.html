@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>baggins</title>
+<meta name="description" content="baggins — Arizona tinkerer. Diesels, solar, mesh radios, circuit boards, and guitar.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #DCE6EA;
+    --pad: #F7F9F8;
+    --ink: #1D2B3A;
+    --muted: #4E5E6C;
+    --copper: #9C5A22;
+    --mesquite: #5B6B3A;
+    --trace-w: 4px;
+    color-scheme: light dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --sky: #16212C;
+      --pad: #22303D;
+      --ink: #E4ECEF;
+      --muted: #A3B2BE;
+      --copper: #D08A4C;
+      --mesquite: #A3B477;
+    }
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--sky);
+    color: var(--ink);
+    font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 10vw, 7rem) 1.5rem 4rem;
+  }
+
+  /* Hero: the name set ultra-wide, then a condensed line under it */
+  h1 {
+    margin: 0;
+    font-size: clamp(3.5rem, 16vw, 8.5rem);
+    font-weight: 900;
+    font-stretch: 125%;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+  .lede {
+    margin: 1.25rem 0 0;
+    font-stretch: 75%;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+    line-height: 1.3;
+    color: var(--muted);
+    max-width: 30ch;
+  }
+
+  /* The copper trace: one line running down the page, hobbies sit on it as pads */
+  .board {
+    position: relative;
+    margin: clamp(3rem, 8vw, 5rem) 0 0;
+    padding: 0 0 0 2.75rem;
+    list-style: none;
+  }
+  .board::before {
+    content: "";
+    position: absolute;
+    left: calc(0.75rem - var(--trace-w) / 2);
+    top: 0.6rem;
+    bottom: 0.6rem;
+    width: var(--trace-w);
+    background: var(--copper);
+    border-radius: 2px;
+    transform-origin: top;
+    animation: draw 1.4s cubic-bezier(.6,.1,.2,1) both;
+  }
+  @keyframes draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+  .board li { position: relative; padding-bottom: 2.25rem; }
+  .board li:last-child { padding-bottom: 0; }
+  .board li::before {
+    content: "";
+    position: absolute;
+    left: -2.75rem;
+    top: 0.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--pad);
+    border: var(--trace-w) solid var(--copper);
+  }
+  .board li.via::before { background: var(--copper); }
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 750;
+    font-stretch: 110%;
+    line-height: 1.25;
+  }
+  .board p { margin: 0.35rem 0 0; color: var(--muted); max-width: 60ch; }
+
+  footer {
+    margin-top: clamp(3.5rem, 9vw, 6rem);
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--copper);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    font-stretch: 85%;
+    color: var(--muted);
+  }
+  a { color: var(--ink); text-decoration-color: var(--copper); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+  a:hover { color: var(--copper); }
+  a:focus-visible { outline: 3px solid var(--mesquite); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .board::before { animation: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>baggins</h1>
+    <p class="lede">Arizona tinkerer. If it has a wire, a bolt, or a firmware update, I've probably taken it apart.</p>
+  </header>
+
+  <ul class="board" aria-label="Things I spend my time on">
+    <li>
+      <h2>Diesel wrenching</h2>
+      <p>Keeping a 2001 Ford Excursion with the 7.3L Power Stroke alive and happy, and chasing fault codes on anything else that rolls into the driveway.</p>
+    </li>
+    <li class="via">
+      <h2>Off-grid solar</h2>
+      <p>A hybrid inverter, a LiFePO4 battery bank, and a slowly growing plan to go 48V. The Arizona sun should be working for me.</p>
+    </li>
+    <li>
+      <h2>Mesh radio</h2>
+      <p>Running Meshtastic nodes on Heltec and RAK boards — text messaging with no cell towers involved.</p>
+    </li>
+    <li class="via">
+      <h2>Circuit boards</h2>
+      <p>Designing my own PCBs, like a temperature-controlled fan driver built around an ATtiny85.</p>
+    </li>
+    <li>
+      <h2>Home lab</h2>
+      <p>PC builds, a homemade NAS, and a security camera recorder running on spare parts.</p>
+    </li>
+    <li class="via">
+      <h2>Guitar</h2>
+      <p>For when the soldering iron needs to cool down.</p>
+    </li>
+    <li>
+      <h2>Rabbit holes</h2>
+      <p>Whatever science question showed up this week, followed until it makes sense.</p>
+    </li>
+  </ul>
+
+  <footer>
+    <span>Chandler, Arizona</span>
+    <!-- Replace with your real contact or GitHub link -->
+    <a href="mailto:hello@example.com">Say hello</a>
+  </footer>
+</main>
+</body>
+</html>
